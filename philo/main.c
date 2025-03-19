@@ -7,25 +7,29 @@ void *philo(void *a)
 	return (NULL);
 }
 
+void	init_struct(t_program *p)
+{
+	p->philo_died = 0;
+	p->philos = (t_philo *)malloc(sizeof(t_philo) * p->diners);
+	if (!p->philos)
+		return ;
+	p->forks = (t_fork *)malloc(sizeof(t_fork) * p->diners);
+	if (!p->forks)
+		return ;
+}
+
 int main(int ac, char **av)
 {
-	// int 		i;
-	// int 		philo_count;
-	// t_program	*program;
-	// pthread_t	threads[philo_count];
-	// t_philo		philos[philo_count];	
-	if (check_input(ac, av) == 0)
-		return (0);
-	// philo_count = ft_atoi(av[1]);
-	// i = 0;
-	// while (i < philo_count)
-	// {
-	// 	philos[i].id = i + 1;
-	// 	if (pthread_create(&threads[i], NULL, philo, &philos[i]) != 0)
-	// 		printf("No se pudo crear hilo");
-	// 	i++;
-	// }
-	// for (int i = 0; i < philo_count; i++)
-	// 	pthread_join(threads[i], NULL);
-	// return (0);
+	t_program	*program;
+
+	program = (t_program *)malloc(sizeof(t_program));
+	if (!program)
+		return (1);
+	if (check_input(ac, av, program) == 0)
+	{
+		free(program);
+		return (1);
+	}
+	init_struct(program);
+	return (0);
 }

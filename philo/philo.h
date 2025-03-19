@@ -26,8 +26,6 @@ struct	s_philo
 {
 	int			id;
 	int			is_dead;
-	int			is_eating;
-	int			is_thinking;
 	t_fork		*r_fork;
 	t_fork		*l_fork;
 	t_program	*program;
@@ -37,6 +35,7 @@ struct	s_program
 {
 	t_philo	*philos;
 	t_fork	*forks;
+	int		philo_died;
 	int		diners;
 	int		to_die;
 	int		to_eat;
@@ -47,6 +46,6 @@ struct	s_program
 /*FUNCTIONS*/
 
 int	ft_atoi(char *s);
-int check_input(int ac, char **av);
+int check_input(int ac, char **av, t_program *program);
 
 #endif

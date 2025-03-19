@@ -1,6 +1,6 @@
 #include "../philo.h"
 
-int	parse_input(int ac, char **av)
+int	parse_input(int ac, char **av, t_program *program)
 {
 	int	i;
 
@@ -16,22 +16,22 @@ int	parse_input(int ac, char **av)
 		if (ft_atoi(av[i]) < 60)
 			return (0);
 	}
-	// program->diners = ft_atoi(av[1]);
-	// program->to_die = ft_atoi(av[2]);
-	// program->to_eat = ft_atoi(av[3]);
-	// program->to_think = ft_atoi(av[4]);
-	// if (av[5])
-	// 	program->times_eat = ft_atoi(av[5]);
+	program->diners = ft_atoi(av[1]);
+	program->to_die = ft_atoi(av[2]);
+	program->to_eat = ft_atoi(av[3]);
+	program->to_think = ft_atoi(av[4]);
+	if (av[5])
+		program->times_eat = ft_atoi(av[5]);
 	return (1);
 }
 
-int check_input(int ac, char **av)
+int check_input(int ac, char **av, t_program *program)
 {
 	if (ac < 5 || ac > 6)
 		return (0);
 	else
 	{
-		if (parse_input(ac, av) == 0)
+		if (parse_input(ac, av, program) == 0)
 		{
 			write(2, "Error: Invalid input\n", 22);
 			return (0);
