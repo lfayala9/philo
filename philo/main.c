@@ -9,6 +9,8 @@ void *philo(void *a)
 
 void	init_struct(t_program *p)
 {
+	int	i;
+
 	p->philo_died = 0;
 	p->philos = (t_philo *)malloc(sizeof(t_philo) * p->diners);
 	if (!p->philos)
@@ -16,6 +18,13 @@ void	init_struct(t_program *p)
 	p->forks = (t_fork *)malloc(sizeof(t_fork) * p->diners);
 	if (!p->forks)
 		return ;
+	i = 0;
+	while (i < p->diners)
+	{
+		p->forks[i].philo = NULL;
+		pthread_mutex_init(&p->forks[i].fork, NULL);
+		i++;
+	}
 }
 
 int main(int ac, char **av)
@@ -31,5 +40,8 @@ int main(int ac, char **av)
 		return (1);
 	}
 	init_struct(program);
+	free(program->philos);
+	free(program->forks);
+	free(program);
 	return (0);
 }

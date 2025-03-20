@@ -1,21 +1,31 @@
 #include "../philo.h"
 
-int	ft_atoi(char *s)
+int	ft_strlen(char *s)
 {
 	int	i;
-	int	res;
-	int	sign;
-	
+
 	i = 0;
-	res = 0;
-	sign = 1;
-	while ((s[i] >= 9 && s[i] <= 13) || s[i] == 32)
+	while(s[i])
 		i++;
-	if (s[i] == '-')
-		sign = -1;
-	if (s[i] == '-' || s[i] == '+')
-		i++;
-	while (s[i] >= '0' && s[i] <= '9')
-		res = res * 10 + (s[i++] - '0');
-	return (res * sign);
+	return (i);
+}
+
+long ft_atol(const char *s)
+{
+	size_t  i;
+	long	result;
+    int		sign;
+
+    i = 0;
+    result = 0;
+    sign = 1;
+    while ((s[i] >= 9 && s[i] <= 13) || s[i] == 32)
+            i++;
+    if (s[i] == '-')
+            sign = -1;
+    if (s[i] == '-' || s[i] == '+')
+            i++;
+    while (s[i] >= '0' && s[i] <= '9')
+            result = result * 10 + (s[i++] - '0');
+    return (sign * result);
 }

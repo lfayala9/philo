@@ -45,7 +45,8 @@ struct	s_program
 
 /*FUNCTIONS*/
 
-int	ft_atoi(char *s);
+int	ft_strlen(char *s);
+long ft_atol(const char *s);
 int check_input(int ac, char **av, t_program *program);
 
 #endif

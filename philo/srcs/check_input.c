@@ -7,21 +7,22 @@ int	parse_input(int ac, char **av, t_program *program)
 	i = 0;
 	while (++i < ac)
 	{
-		if (ft_atoi(av[i]) > 2147483647 || ft_atoi(av[i]) < 1)
+		if (ft_atol(av[i]) > 2147483647 || ft_atol(av[i]) < 1 \
+			|| ft_strlen(av[i]) > 11)
 			return (0);
 	}
 	i = 1;
 	while (++i < 5)
 	{
-		if (ft_atoi(av[i]) < 60)
+		if (ft_atol(av[i]) < 60)
 			return (0);
 	}
-	program->diners = ft_atoi(av[1]);
-	program->to_die = ft_atoi(av[2]);
-	program->to_eat = ft_atoi(av[3]);
-	program->to_think = ft_atoi(av[4]);
+	program->diners = ft_atol(av[1]);
+	program->to_die = ft_atol(av[2]);
+	program->to_eat = ft_atol(av[3]);
+	program->to_think = ft_atol(av[4]);
 	if (av[5])
-		program->times_eat = ft_atoi(av[5]);
+		program->times_eat = ft_atol(av[5]);
 	return (1);
 }
 
