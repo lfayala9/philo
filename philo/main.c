@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: layala-s <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/20 13:33:33 by layala-s          #+#    #+#             */
+/*   Updated: 2025/03/20 13:33:35 by layala-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-void *philo(void *a)
-{
-	t_philo	*philo = (t_philo *)a;
-	printf("%ld is thinking\n", pthread_self());
-	return (NULL);
-}
+// void	*philo(void *a)
+// {
+// 	t_philo	*philo = (t_philo *)a;
+// 	printf("%ld is thinking\n", pthread_self());
+// 	return (NULL);
+// }
 
 void	init_struct(t_program *p)
 {
@@ -27,7 +39,7 @@ void	init_struct(t_program *p)
 	}
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_program	*program;
 

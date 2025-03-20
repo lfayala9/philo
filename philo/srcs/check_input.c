@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_input.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: layala-s <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/20 13:44:26 by layala-s          #+#    #+#             */
+/*   Updated: 2025/03/20 13:44:28 by layala-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../philo.h"
 
 int	parse_input(int ac, char **av, t_program *program)
@@ -26,7 +38,7 @@ int	parse_input(int ac, char **av, t_program *program)
 	return (1);
 }
 
-int check_input(int ac, char **av, t_program *program)
+int	check_input(int ac, char **av, t_program *program)
 {
 	if (ac < 5 || ac > 6)
 		return (0);

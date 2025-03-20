@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: layala-s <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/20 13:39:09 by layala-s          #+#    #+#             */
+/*   Updated: 2025/03/20 13:43:58 by layala-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../philo.h"
 
 int	ft_strlen(char *s)
@@ -5,27 +17,27 @@ int	ft_strlen(char *s)
 	int	i;
 
 	i = 0;
-	while(s[i])
+	while (s[i])
 		i++;
 	return (i);
 }
 
-long ft_atol(const char *s)
+long	ft_atol(char *s)
 {
-	size_t  i;
-	long	result;
-    int		sign;
+	size_t	i;
+	long	res;
+	int		sign;
 
-    i = 0;
-    result = 0;
-    sign = 1;
-    while ((s[i] >= 9 && s[i] <= 13) || s[i] == 32)
-            i++;
-    if (s[i] == '-')
-            sign = -1;
-    if (s[i] == '-' || s[i] == '+')
-            i++;
-    while (s[i] >= '0' && s[i] <= '9')
-            result = result * 10 + (s[i++] - '0');
-    return (sign * result);
+	i = 0;
+	res = 0;
+	sign = 1;
+	while ((s[i] >= 9 && s[i] <= 13) || s[i] == 32)
+		i++;
+	if (s[i] == '-')
+		sign = -1;
+	if (s[i] == '-' || s[i] == '+')
+		i++;
+	while (s[i] >= '0' && s[i] <= 9)
+		res = res * 10 + (s[i++] - '0');
+	return (sign * res);
 }
