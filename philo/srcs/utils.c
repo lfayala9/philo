@@ -22,7 +22,7 @@ int	ft_strlen(char *s)
 	return (i);
 }
 
-long	ft_atol(char *s)
+long	ft_atol(const char *s)
 {
 	size_t	i;
 	long	res;
@@ -37,7 +37,7 @@ long	ft_atol(char *s)
 		sign = -1;
 	if (s[i] == '-' || s[i] == '+')
 		i++;
-	while (s[i] >= '0' && s[i] <= 9)
+	while (s[i] >= '0' && s[i] <= '9')
 		res = res * 10 + (s[i++] - '0');
 	return (sign * res);
 }

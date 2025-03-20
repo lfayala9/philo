@@ -44,14 +44,15 @@ struct	s_philo
 
 struct	s_program
 {
-	int		philo_died;
-	int		diners;
-	int		to_die;
-	int		to_eat;
-	int		to_think;
-	int		times_eat;
-	t_philo	*philos;
-	t_fork	*forks;
+	int				diners;
+	int				to_die;
+	int				to_eat;
+	int				to_think;
+	int				times_eat;
+	int				philo_died;
+	t_philo			*philos;
+	t_fork			*forks;
+	pthread_mutex_t philo_died_mutex;
 };
 
 /*FUNCTIONS*/
