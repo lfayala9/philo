@@ -7,6 +7,7 @@ FLAGS = -Wall -Wextra -Werror
 OBJS = $(SRCS:.c=.o)
 
 SRCS = ./srcs/utils.c \
+		./srcs/dinner.c \
 		./srcs/check_input.c \
 
 INCLUDE = -lpthread

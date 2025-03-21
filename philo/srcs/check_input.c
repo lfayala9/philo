@@ -12,7 +12,7 @@
 
 #include "../philo.h"
 
-int	parse_input(int ac, char **av, t_program *program)
+int	parse_input(int ac, char **av, t_dinner *dinner)
 {
 	int	i;
 
@@ -29,22 +29,22 @@ int	parse_input(int ac, char **av, t_program *program)
 		if (ft_atol(av[i]) < 60)
 			return (0);
 	}
-	program->diners = ft_atol(av[1]);
-	program->to_die = ft_atol(av[2]);
-	program->to_eat = ft_atol(av[3]);
-	program->to_think = ft_atol(av[4]);
+	dinner->diners = ft_atol(av[1]);
+	dinner->to_die = ft_atol(av[2]);
+	dinner->to_eat = ft_atol(av[3]);
+	dinner->to_think = ft_atol(av[4]);
 	if (av[5])
-		program->times_eat = ft_atol(av[5]);
+		dinner->times_eat = ft_atol(av[5]);
 	return (1);
 }
 
-int	check_input(int ac, char **av, t_program *program)
+int	check_input(int ac, char **av, t_dinner *dinner)
 {
 	if (ac < 5 || ac > 6)
 		return (0);
 	else
 	{
-		if (parse_input(ac, av, program) == 0)
+		if (parse_input(ac, av, dinner) == 0)
 		{
 			write(2, "Error: Invalid input\n", 22);
 			return (0);
