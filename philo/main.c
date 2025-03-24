@@ -16,7 +16,7 @@ long	timestamp(void)
 {
 	struct timeval	tv;
 
-	gettimeofday(&tv, NULL);
+	gettimeofday(&tv, 0);
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
@@ -63,40 +63,36 @@ void	assign_forks(t_philo *philo, t_fork *forks, int pos)
 void	init_philos(t_dinner *d)
 {
 	int		pos;
-	t_philo	*philo;
+	t_philo	*p;
 
 	pos = 0;
 	while (pos < d->diners)
 	{
-		philo = d->philos + pos;
-		philo->id = pos + 1;
-		philo->dinner = d;
-		assign_forks(philo, d->forks, pos);
-		// printf("Filosofo %d tiene tenedores [%d] y [%d]\n",
-		// 	philo->id,
-		// 	philo->l_fork->id,
-		// 	philo->r_fork->id);
+		p = d->philos + pos;
+		p->id = pos + 1;
+		p->dinner = d;
+		assign_forks(p, d->forks, pos);
 		pos++;
 	}
 }
 
 int	main(int ac, char **av)
 {
-	t_dinner	*dinner;
+	t_dinner	*d;
 	
-	dinner = (t_dinner *)malloc(sizeof(t_dinner));
-	if (!dinner)
+	d = (t_dinner *)malloc(sizeof(t_dinner));
+	if (!d)
 		return (-1);
-	if (check_input(ac, av, dinner) == 0)
-		return (free(dinner), -1);
-	init_struct(dinner);
-	pthread_mutex_init(&dinner->print, NULL);
-	init_philos(dinner);
-	dinner->dinner_start = timestamp();
-	do_dinner(dinner);
-	pthread_mutex_destroy(&dinner->print);
-	pthread_mutex_destroy(&dinner->philo_died_mutex);
-	free(dinner->philos);
-	free(dinner->forks);
-	return (free(dinner), 0);
+	if (check_input(ac, av, d) == 0)
+		return (free(d), -1);
+	init_struct(d);
+	pthread_mutex_init(&d->print, NULL);
+	init_philos(d);
+	d->dinner_start = timestamp();
+	do_d(d);
+	pthread_mutex_destroy(&d->print);
+	pthread_mutex_destroy(&d->philo_died_mutex);
+	free(d->philos);
+	free(d->forks);
+	return (free(d), 0);
 }

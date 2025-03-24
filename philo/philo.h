@@ -36,6 +36,7 @@ struct s_fork
 struct	s_philo
 {
 	int				id;
+	int				meals;
 	int				is_dead;
 	t_fork			*r_fork;
 	t_fork			*l_fork;
@@ -67,5 +68,6 @@ long	ft_atol(const char *s);
 long	timestamp(void);
 int		ft_strlen(char *s);
 int		check_input(int ac, char **av, t_dinner *dinner);
+void	philo_eat(t_philo *d);
 
 #endif
