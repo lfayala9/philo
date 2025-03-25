@@ -32,7 +32,7 @@ int	parse_input(int ac, char **av, t_dinner *dinner)
 	dinner->diners = ft_atol(av[1]);
 	dinner->to_die = ft_atol(av[2]);
 	dinner->to_eat = ft_atol(av[3]);
-	dinner->to_think = ft_atol(av[4]);
+	dinner->to_sleep = ft_atol(av[4]);
 	if (av[5])
 		dinner->times_eat = ft_atol(av[5]);
 	return (1);

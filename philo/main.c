@@ -6,7 +6,7 @@
 /*   By: layala-s <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:33:33 by layala-s          #+#    #+#             */
-/*   Updated: 2025/03/20 13:33:35 by layala-s         ###   ########.fr       */
+/*   Updated: 2025/03/25 12:10:27 by layala-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	assign_forks(t_philo *philo, t_fork *forks, int pos)
 	philo->l_fork = &forks[pos];
 	if (philo->id % 2)
 	{
-		philo->r_fork = &forks[pos];	
+		philo->r_fork = &forks[pos];
 		philo->l_fork = &forks[(pos + 1) % diners];
 	}
 }
@@ -79,7 +79,7 @@ void	init_philos(t_dinner *d)
 int	main(int ac, char **av)
 {
 	t_dinner	*d;
-	
+
 	d = (t_dinner *)malloc(sizeof(t_dinner));
 	if (!d)
 		return (-1);
@@ -89,7 +89,7 @@ int	main(int ac, char **av)
 	pthread_mutex_init(&d->print, NULL);
 	init_philos(d);
 	d->dinner_start = timestamp();
-	do_d(d);
+	do_dinner(d);
 	pthread_mutex_destroy(&d->print);
 	pthread_mutex_destroy(&d->philo_died_mutex);
 	free(d->philos);

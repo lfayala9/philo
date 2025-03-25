@@ -22,7 +22,7 @@
 /*TYPES*/
 typedef struct s_fork		t_fork;
 typedef struct s_philo		t_philo;
-typedef struct s_dinner	t_dinner;
+typedef struct s_dinner		t_dinner;
 
 /*STRUCTS*/
 
@@ -42,8 +42,8 @@ struct	s_philo
 	t_fork			*l_fork;
 	t_dinner		*dinner;
 	pthread_t		thread;
-	pthread_mutex_t death;
-	pthread_mutex_t print;
+	pthread_mutex_t	death;
+	pthread_mutex_t	print;
 };
 
 struct	s_dinner
@@ -51,14 +51,16 @@ struct	s_dinner
 	int				diners;
 	int				to_die;
 	int				to_eat;
-	int				to_think;
+	int				to_sleep;
 	int				times_eat;
 	int				philo_died;
-	long unsigned 	dinner_start;
+	int				keep_eating;
+	long unsigned	dinner_start;
 	t_philo			*philos;
 	t_fork			*forks;
-	pthread_mutex_t print;
-	pthread_mutex_t philo_died_mutex;
+	pthread_mutex_t	print;
+	pthread_mutex_t	meals;
+	pthread_mutex_t	philo_died_mutex;
 };
 
 /*FUNCTIONS*/
