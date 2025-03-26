@@ -41,3 +41,10 @@ long	ft_atol(const char *s)
 		res = res * 10 + (s[i++] - '0');
 	return (sign * res);
 }
+
+void	print_mutex(t_philo *p, char *msg, long time, int id)
+{
+	pthread_mutex_lock(&p->dinner->print);
+	printf("%ld: %d %s\n", time - p->dinner->dinner_start, id, msg);
+	pthread_mutex_unlock(&p->dinner->print);
+}

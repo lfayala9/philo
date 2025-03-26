@@ -38,6 +38,7 @@ struct	s_philo
 	int				id;
 	int				meals;
 	int				is_dead;
+	long			last_meal;
 	t_fork			*r_fork;
 	t_fork			*l_fork;
 	t_dinner		*dinner;
@@ -54,13 +55,12 @@ struct	s_dinner
 	int				to_sleep;
 	int				times_eat;
 	int				philo_died;
-	int				keep_eating;
-	long unsigned	dinner_start;
+	long			dinner_start;
 	t_philo			*philos;
 	t_fork			*forks;
 	pthread_mutex_t	print;
 	pthread_mutex_t	meals;
-	pthread_mutex_t	philo_died_mutex;
+	pthread_mutex_t	dead;
 };
 
 /*FUNCTIONS*/
@@ -69,7 +69,11 @@ void	do_dinner(t_dinner *d);
 long	ft_atol(const char *s);
 long	timestamp(void);
 int		ft_strlen(char *s);
+int		time_over(t_philo *p);
 int		check_input(int ac, char **av, t_dinner *dinner);
+int	check_die(t_philo *p);
 void	philo_eat(t_philo *d);
+void	philo_kill(t_philo *p);
+void	print_mutex(t_philo *p, char *msg, long time, int id);
 
 #endif

@@ -12,32 +12,48 @@
 
 #include "../philo.h"
 
-// COMER->DORMIR->PENSAR->
+// COMER->DORMIR->PENSAR->COMER...
+
+int	time_over(t_philo *p)
+{
+	int	is_over;
+
+	is_over = timestamp() - p->last_meal > p->dinner->to_die;
+	return (is_over);
+}
+
+void	philo_kill(t_philo *p)
+{
+	pthread_mutex_lock(&p->dinner->dead);
+	if (p->dinner->philo_died == 0)
+	{
+		p->dinner->philo_died = 1;
+		print_mutex(p, "died", timestamp(), p->id);	
+	}
+	pthread_mutex_unlock(&p->dinner->dead);
+}
 
 void	philo_eat(t_philo *p)
 {
-	while (1)
+	if (check_die(p))
+		return ;
+	pthread_mutex_lock(&p->r_fork->fork);
+	pthread_mutex_lock(&p->l_fork->fork);
+	if (check_die(p))
 	{
-		pthread_mutex_lock(&p->dinner->meals);
-		p->dinner->keep_eating = (p->meals < p->dinner->times_eat \
-		|| !p->dinner->times_eat);
-		pthread_mutex_unlock(&p->dinner->meals);
-		if (!p->dinner->keep_eating)
-			break ;
-		pthread_mutex_lock(&p->dinner->print);
-		printf("%ld: %d Has taken the forks\n", timestamp(), p->id);
-		pthread_mutex_unlock(&p->dinner->print);
-		pthread_mutex_lock(&p->r_fork->fork);
-		pthread_mutex_lock(&p->l_fork->fork);
-		pthread_mutex_lock(&p->dinner->print);
-		printf("%ld: %d is eating...\n", timestamp(), p->id);
-		pthread_mutex_unlock(&p->dinner->print);
-		usleep(p->dinner->to_eat * 1000);
 		pthread_mutex_unlock(&p->r_fork->fork);
 		pthread_mutex_unlock(&p->l_fork->fork);
-		pthread_mutex_lock(&p->dinner->meals);
-		if (p->dinner->times_eat)
-			p->meals++;
-		pthread_mutex_unlock(&p->dinner->meals);
+		return;
 	}
+	print_mutex(p, "has taken a fork", timestamp(), p->id);
+	print_mutex(p, "has taken a fork", timestamp(), p->id);
+	print_mutex(p, "is eating...", timestamp(), p->id);
+	p->last_meal = timestamp();
+	usleep(p->dinner->to_eat * 1000);
+	pthread_mutex_unlock(&p->r_fork->fork);
+	pthread_mutex_unlock(&p->l_fork->fork);
+	pthread_mutex_lock(&p->dinner->meals);
+	if (p->dinner->times_eat)
+		p->meals++;
+	pthread_mutex_unlock(&p->dinner->meals);
 }

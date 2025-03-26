@@ -25,7 +25,7 @@ void	init_struct(t_dinner *d)
 	int	i;
 
 	d->philo_died = 0;
-	if (pthread_mutex_init(&d->philo_died_mutex, NULL) != 0)
+	if (pthread_mutex_init(&d->dead, NULL) != 0)
 		return ;
 	d->philos = (t_philo *)malloc(sizeof(t_philo) * d->diners);
 	if (!d->philos)
@@ -91,7 +91,7 @@ int	main(int ac, char **av)
 	d->dinner_start = timestamp();
 	do_dinner(d);
 	pthread_mutex_destroy(&d->print);
-	pthread_mutex_destroy(&d->philo_died_mutex);
+	pthread_mutex_destroy(&d->dead);
 	free(d->philos);
 	free(d->forks);
 	return (free(d), 0);
