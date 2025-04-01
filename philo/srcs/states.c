@@ -14,14 +14,20 @@
 
 // COMER->DORMIR->PENSAR->COMER...
 
-int	time_over(t_philo *p)
+void	philo_sleep(t_philo *p)
 {
-	int	is_over;
-
-	is_over = timestamp() - p->last_meal > p->dinner->to_die;
-	return (is_over);
+	print_mutex(p, "is sleeping...", timestamp(), p->id);
+	usleep(p->dinner->to_sleep * 1000);
+	p->is_thinking = 0;
+	p->is_eating = 1;
 }
 
+void	philo_think(t_philo *p)
+{
+	print_mutex(p, "is thinking...", timestamp(), p->id);
+	p->is_thinking = 0;
+	p->is_eating = 1;
+}
 void	philo_kill(t_philo *p)
 {
 	pthread_mutex_lock(&p->dinner->dead);
@@ -56,4 +62,6 @@ void	philo_eat(t_philo *p)
 	if (p->dinner->times_eat)
 		p->meals++;
 	pthread_mutex_unlock(&p->dinner->meals);
+	p->is_eating = 0;
+	p->is_sleeping = 1;
 }

@@ -71,6 +71,10 @@ void	init_philos(t_dinner *d)
 		p = d->philos + pos;
 		p->id = pos + 1;
 		p->dinner = d;
+		p->is_thinking = 1;
+		p->is_eating = 0;
+		p->is_sleeping = 0;
+		p->last_meal = d->dinner_start;
 		assign_forks(p, d->forks, pos);
 		pos++;
 	}

@@ -2,7 +2,7 @@ NAME = philo
 
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -fsanitize=thread -Wall -Wextra -Werror
 
 OBJS = $(SRCS:.c=.o)
 
@@ -16,7 +16,7 @@ INCLUDE = -lpthread
 all: $(NAME)
 
 $(NAME): $(OBJS)
-				$(CC) main.c $(SRCS) $(INLCUDE) -o $(NAME)
+				$(CC) $(FLAGS) main.c $(SRCS) $(INLCUDE) -o $(NAME)
 
 clean:
 		rm -rf $(OBJS)

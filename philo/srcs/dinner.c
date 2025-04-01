@@ -28,25 +28,26 @@ int	check_die(t_philo *p)
 void	*philo(void *arg)
 {
 	t_philo	*p;
-	int		keep;
 
 	p = (t_philo *)arg;
+	if (p->id % 2 == 0)
+		usleep(100);
 	while (1)
 	{
 		if (check_die(arg))
 			break ;
-		if (!check_die(arg))
+		if (p->is_thinking == 1)
+			philo_think(arg);
+		if (p->is_eating == 1 && !check_die(arg))
 			philo_eat(arg);
+		if (p->is_sleeping == 1 && !check_die(arg))
+			philo_sleep(arg);
 		if (time_over(arg))
 		{
 			philo_kill(arg);
 			break ;
 		}
-		pthread_mutex_lock(&p->dinner->meals);
-		keep = (p->meals < p->dinner->times_eat \
-		|| !p->dinner->times_eat);
-		pthread_mutex_unlock(&p->dinner->meals);
-		if (!keep)
+		if (!keep_eating(arg))
 			break ;
 	}
 	return (NULL);
@@ -63,8 +64,5 @@ void	do_dinner(t_dinner *d)
 	// IF philo died || meals done
 	//			--> break ; 
 	while (++i < d->diners)
-	{
-		// printf("------------------------> Cerrado el hilo del filosofo %d\n", d->philos[i].id);
 		pthread_join(d->philos[i].thread, NULL);
-	}
 }

@@ -48,3 +48,22 @@ void	print_mutex(t_philo *p, char *msg, long time, int id)
 	printf("%ld: %d %s\n", time - p->dinner->dinner_start, id, msg);
 	pthread_mutex_unlock(&p->dinner->print);
 }
+
+int	time_over(t_philo *p)
+{
+	int	is_over;
+
+	is_over = timestamp() - p->last_meal > p->dinner->to_die;
+	return (is_over);
+}
+
+int	keep_eating(t_philo *p)
+{
+	int	keep;
+
+	pthread_mutex_lock(&p->dinner->meals);
+	keep = (p->meals < p->dinner->times_eat \
+	|| !p->dinner->times_eat);
+	pthread_mutex_unlock(&p->dinner->meals);
+	return (keep);
+}

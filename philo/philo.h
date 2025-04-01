@@ -38,6 +38,9 @@ struct	s_philo
 	int				id;
 	int				meals;
 	int				is_dead;
+	int				is_eating;
+	int				is_thinking;
+	int				is_sleeping;
 	long			last_meal;
 	t_fork			*r_fork;
 	t_fork			*l_fork;
@@ -70,10 +73,14 @@ long	ft_atol(const char *s);
 long	timestamp(void);
 int		ft_strlen(char *s);
 int		time_over(t_philo *p);
+int		time_over(t_philo *p);
 int		check_input(int ac, char **av, t_dinner *dinner);
-int	check_die(t_philo *p);
+int		check_die(t_philo *p);
+int		keep_eating(t_philo *p);
 void	philo_eat(t_philo *d);
 void	philo_kill(t_philo *p);
+void	philo_think(t_philo *p);
+void	philo_sleep(t_philo *p);
 void	print_mutex(t_philo *p, char *msg, long time, int id);
 
 #endif
