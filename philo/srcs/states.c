@@ -46,10 +46,8 @@ void	philo_eat(t_philo *p)
 {
 	if (check_die(p) || time_over(p))
 		return ;
-	pthread_mutex_lock(&p->r_fork->fork);
-	print_mutex(p, "has taken a fork", timestamp(), p->id);
-	pthread_mutex_lock(&p->l_fork->fork);
-	print_mutex(p, "has taken a fork", timestamp(), p->id);
+	if (!grab_forks(p))
+		return ;
 	print_mutex(p, "is eating", timestamp(), p->id);
 	p->last_meal = timestamp();
 	usleep(p->dinner->to_eat * 1000);

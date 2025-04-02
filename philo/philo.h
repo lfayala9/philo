@@ -76,6 +76,8 @@ int		time_over(t_philo *p);
 int		check_input(int ac, char **av, t_dinner *dinner);
 int		check_die(t_philo *p);
 int		keep_eating(t_philo *p);
+int		grab_forks(t_philo *p);
+void	init_sleep(t_philo *p);
 void	philo_eat(t_philo *d);
 void	philo_kill(t_philo *p);
 void	philo_think(t_philo *p);

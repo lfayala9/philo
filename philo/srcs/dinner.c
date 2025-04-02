@@ -42,11 +42,9 @@ void	*philo(void *arg)
 	t_philo	*p;
 
 	p = (t_philo *)arg;
-	check_one(p);
-	if (p->id % 2 == 0)
-		usleep(100);
-	else if (p->dinner->diners % 2 != 0)
-		usleep(200);
+	if (check_one(p))
+		return (NULL);
+	init_sleep(p);
 	while (1)
 	{
 		if (time_over(arg))

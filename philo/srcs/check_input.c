@@ -12,6 +12,34 @@
 
 #include "../philo.h"
 
+void	init_sleep(t_philo *p)
+{
+	if (p->id % 2 == 0)
+		usleep(100);
+	else if (p->dinner->diners % 2 != 0)
+		usleep(200);
+}
+
+int	grab_forks(t_philo *p)
+{
+	pthread_mutex_lock(&p->r_fork->fork);
+	if (check_die(p))
+	{
+		pthread_mutex_unlock(&p->r_fork->fork);
+		return (0);
+	}
+	print_mutex(p, "has taken a fork", timestamp(), p->id);
+	pthread_mutex_lock(&p->l_fork->fork);
+	if (check_die(p))
+	{
+		pthread_mutex_unlock(&p->r_fork->fork);
+		pthread_mutex_unlock(&p->l_fork->fork);
+		return (0);
+	}
+	print_mutex(p, "has taken a fork", timestamp(), p->id);
+	return (1);
+}
+
 int	parse_input(int ac, char **av, t_dinner *dinner)
 {
 	int	i;
