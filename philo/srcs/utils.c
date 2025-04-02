@@ -45,16 +45,15 @@ long	ft_atol(const char *s)
 void	print_mutex(t_philo *p, char *msg, long time, int id)
 {
 	pthread_mutex_lock(&p->dinner->print);
-	printf("%ld: %d %s\n", time - p->dinner->dinner_start, id, msg);
+	printf("%ld %d %s\n", time - p->dinner->dinner_start, id, msg);
 	pthread_mutex_unlock(&p->dinner->print);
 }
 
 int	time_over(t_philo *p)
 {
 	long	now;
+
 	now = timestamp();
-	if (p->dinner->times_eat)
-		return (0);
 	return (now - p->last_meal > p->dinner->to_die);
 }
 

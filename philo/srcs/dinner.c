@@ -14,7 +14,7 @@
 
 int	check_die(t_philo *p)
 {
-	int dead_philo;
+	int	dead_philo;
 
 	pthread_mutex_lock(&p->dinner->dead);
 	if (p->dinner->philo_died)
@@ -45,6 +45,8 @@ void	*philo(void *arg)
 	check_one(p);
 	if (p->id % 2 == 0)
 		usleep(100);
+	else if (p->dinner->diners % 2 != 0)
+		usleep(200);
 	while (1)
 	{
 		if (time_over(arg))
@@ -77,7 +79,7 @@ void	do_dinner(t_dinner *d)
 		d->philos[i].last_meal = d->dinner_start;
 		pthread_create(&d->philos[i].thread, NULL, philo, &d->philos[i]);
 	}
-		i = -1;
+	i = -1;
 	while (++i < d->diners)
 		pthread_join(d->philos[i].thread, NULL);
 }

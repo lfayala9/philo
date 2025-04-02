@@ -37,7 +37,6 @@ struct	s_philo
 {
 	int				id;
 	int				meals;
-	int				is_dead;
 	int				is_eating;
 	int				is_thinking;
 	int				is_sleeping;
