@@ -51,10 +51,11 @@ void	print_mutex(t_philo *p, char *msg, long time, int id)
 
 int	time_over(t_philo *p)
 {
-	int	is_over;
-
-	is_over = timestamp() - p->last_meal > p->dinner->to_die;
-	return (is_over);
+	long	now;
+	now = timestamp();
+	if (p->dinner->times_eat)
+		return (0);
+	return (now - p->last_meal > p->dinner->to_die);
 }
 
 int	keep_eating(t_philo *p)

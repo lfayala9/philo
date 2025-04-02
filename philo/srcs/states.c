@@ -41,11 +41,11 @@ void	philo_kill(t_philo *p)
 
 void	philo_eat(t_philo *p)
 {
-	if (check_die(p))
+	if (check_die(p) || time_over(p))
 		return ;
 	pthread_mutex_lock(&p->r_fork->fork);
 	pthread_mutex_lock(&p->l_fork->fork);
-	if (check_die(p))
+	if (check_die(p) || time_over(p))
 	{
 		pthread_mutex_unlock(&p->r_fork->fork);
 		pthread_mutex_unlock(&p->l_fork->fork);
