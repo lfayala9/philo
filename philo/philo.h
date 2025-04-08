@@ -82,7 +82,7 @@ void	philo_eat(t_philo *d);
 void	philo_kill(t_philo *p);
 void	philo_think(t_philo *p);
 void	philo_sleep(t_philo *p);
-void 	do_sleep(t_philo *p, long duration);
+void 	do_usleep(t_philo *p, long duration);
 void	print_mutex(t_philo *p, char *msg, long time, int id);
 
 #endif

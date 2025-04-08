@@ -19,7 +19,7 @@ void	philo_sleep(t_philo *p)
 	if (check_die(p) || time_over(p))
 		return ;
 	print_mutex(p, "is sleeping", timestamp(), p->id);
-	do_sleep(p, p->dinner->to_sleep);
+	do_usleep(p, p->dinner->to_sleep);
 	p->is_sleeping = 0;
 	p->is_thinking = 1;
 }
@@ -50,7 +50,7 @@ void	philo_eat(t_philo *p)
 		return ;
 	print_mutex(p, "is eating", timestamp(), p->id);
 	p->last_meal = timestamp();
-	do_sleep(p, p->dinner->to_eat);
+	do_usleep(p, p->dinner->to_eat);
 	pthread_mutex_unlock(&p->r_fork->fork);
 	pthread_mutex_unlock(&p->l_fork->fork);
 	pthread_mutex_lock(&p->dinner->meals);

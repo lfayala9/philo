@@ -37,7 +37,7 @@ int	check_one(t_philo *p)
 	return (0);
 }
 
-void do_sleep(t_philo *p, long duration)
+void do_usleep(t_philo *p, long duration)
 {
     long start_time = timestamp();
     long current_time;
@@ -56,7 +56,7 @@ void do_sleep(t_philo *p, long duration)
             philo_kill(p);
             return;
         }        
-        usleep(1000); // 1ms
+        usleep(1);
     }
 }
 
