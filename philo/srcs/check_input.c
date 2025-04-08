@@ -28,7 +28,8 @@ int	grab_forks(t_philo *p)
 		pthread_mutex_unlock(&p->r_fork->fork);
 		return (0);
 	}
-	print_mutex(p, "has taken a fork", timestamp(), p->id);
+	print_mutex(p, "\001\033[1;35m\002has taken a fork\001\033[0m\002", timestamp(), \
+	p->id);
 	pthread_mutex_lock(&p->l_fork->fork);
 	if (check_die(p) || time_over(p))
 	{
@@ -36,7 +37,8 @@ int	grab_forks(t_philo *p)
 		pthread_mutex_unlock(&p->l_fork->fork);
 		return (0);
 	}
-	print_mutex(p, "has taken a fork", timestamp(), p->id);
+	print_mutex(p, "\001\033[1;35m\002has taken a fork\001\033[0m\002", timestamp(), \
+	p->id);
 	return (1);
 }
 

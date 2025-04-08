@@ -13,6 +13,7 @@
 #ifndef PHILO_H
 # define PHILO_H
 
+/*INCLUDES*/
 # include <unistd.h>
 # include <pthread.h>
 # include <stdlib.h>
@@ -66,23 +67,22 @@ struct	s_dinner
 };
 
 /*FUNCTIONS*/
-
-void	do_dinner(t_dinner *d);
-long	ft_atol(const char *s);
-long	timestamp(void);
 int		ft_strlen(char *s);
 int		time_over(t_philo *p);
 int		time_over(t_philo *p);
-int		check_input(int ac, char **av, t_dinner *dinner);
 int		check_die(t_philo *p);
-int		keep_eating(t_philo *p);
 int		grab_forks(t_philo *p);
-void	init_sleep(t_philo *p);
+int		keep_eating(t_philo *p);
+int		check_input(int ac, char **av, t_dinner *dinner);
 void	philo_eat(t_philo *d);
+void	init_sleep(t_philo *p);
+void	do_dinner(t_dinner *d);
 void	philo_kill(t_philo *p);
 void	philo_think(t_philo *p);
 void	philo_sleep(t_philo *p);
-void 	do_usleep(t_philo *p, long duration);
+void	do_usleep(t_philo *p, long duration);
 void	print_mutex(t_philo *p, char *msg, long time, int id);
+long	timestamp(void);
+long	ft_atol(const char *s);
 
 #endif

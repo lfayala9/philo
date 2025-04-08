@@ -37,27 +37,26 @@ int	check_one(t_philo *p)
 	return (0);
 }
 
-void do_usleep(t_philo *p, long duration)
+void	do_usleep(t_philo *p, long duration)
 {
-    long start_time = timestamp();
-    long current_time;
-    
-    while (1)
-    {
-        if (check_die(p))
-            return;
-            
-        current_time = timestamp();
-        if (current_time - start_time >= duration)
-            return;
-            
-        if (current_time - p->last_meal > p->dinner->to_die)
-        {
-            philo_kill(p);
-            return;
-        }        
-        usleep(1);
-    }
+	long	start_time;
+	long	current_time;
+
+	start_time = timestamp();
+	while (1)
+	{
+		if (check_die(p))
+			return ;
+		current_time = timestamp();
+		if (current_time - start_time >= duration)
+			return ;
+		if (current_time - p->last_meal > p->dinner->to_die)
+		{
+			philo_kill(p);
+			return ;
+		}
+		usleep(1);
+	}
 }
 
 void	*philo(void *arg)
