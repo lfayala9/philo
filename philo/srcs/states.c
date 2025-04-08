@@ -39,7 +39,8 @@ void	philo_kill(t_philo *p)
 	if (p->dinner->philo_died == 0)
 	{
 		p->dinner->philo_died = 1;
-		print_mutex(p, "\001\033[1;31m\002died\001\033[0m\002", timestamp(), p->id);
+		print_mutex(p, "\001\033[1;31m\002died\001\033[0m\002", timestamp(), \
+		p->id);
 	}
 	pthread_mutex_unlock(&p->dinner->dead);
 }
@@ -52,7 +53,9 @@ void	philo_eat(t_philo *p)
 		return ;
 	print_mutex(p, "\001\033[1;33m\002is eating\001\033[0m\002", timestamp(), \
 	p->id);
+	pthread_mutex_lock(&p->death);
 	p->last_meal = timestamp();
+	pthread_mutex_unlock(&p->death);
 	do_usleep(p, p->dinner->to_eat);
 	pthread_mutex_unlock(&p->r_fork->fork);
 	pthread_mutex_unlock(&p->l_fork->fork);

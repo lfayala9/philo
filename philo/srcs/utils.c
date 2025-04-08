@@ -52,9 +52,13 @@ void	print_mutex(t_philo *p, char *msg, long time, int id)
 int	time_over(t_philo *p)
 {
 	long	now;
+	int		result;
 
 	now = timestamp();
-	return (now - p->last_meal > p->dinner->to_die);
+	pthread_mutex_lock(&p->death);
+	result = (now - p->last_meal > p->dinner->to_die);
+	pthread_mutex_unlock(&p->death);
+	return (result);
 }
 
 int	keep_eating(t_philo *p)
