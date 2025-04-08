@@ -37,6 +37,29 @@ int	check_one(t_philo *p)
 	return (0);
 }
 
+void do_sleep(t_philo *p, long duration)
+{
+    long start_time = timestamp();
+    long current_time;
+    
+    while (1)
+    {
+        if (check_die(p))
+            return;
+            
+        current_time = timestamp();
+        if (current_time - start_time >= duration)
+            return;
+            
+        if (current_time - p->last_meal > p->dinner->to_die)
+        {
+            philo_kill(p);
+            return;
+        }        
+        usleep(1000); // 1ms
+    }
+}
+
 void	*philo(void *arg)
 {
 	t_philo	*p;
