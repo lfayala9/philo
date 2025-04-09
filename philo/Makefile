@@ -2,7 +2,7 @@ NAME = philo
 
 CC = cc
 
-FLAGS = -fsanitize=thread -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror #-fsanitize=thread
 
 OBJS = $(SRCS:.c=.o)
 
