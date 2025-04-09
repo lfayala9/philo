@@ -49,8 +49,16 @@ void	philo_eat(t_philo *p)
 {
 	if (check_die(p) || time_over(p))
 		return ;
-	if (!grab_forks(p))
-		return ;
+	if (p->dinner->diners == 3)
+	{
+		if (!grab_if3(p))
+			return ;
+	}
+	else
+	{
+		if (!grab_forks(p))
+			return ;
+	}
 	print_mutex(p, "\001\033[1;33m\002is eating\001\033[0m\002", timestamp(), \
 	p->id);
 	pthread_mutex_lock(&p->death);

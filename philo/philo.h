@@ -59,15 +59,17 @@ struct	s_dinner
 	int				times_eat;
 	int				philo_died;
 	long			dinner_start;
-	t_philo			*philos;
 	t_fork			*forks;
-	pthread_mutex_t	print;
-	pthread_mutex_t	meals;
+	t_philo			*philos;
 	pthread_mutex_t	dead;
+	pthread_mutex_t	meals;
+	pthread_mutex_t	print;
+	pthread_mutex_t	take_forks;
 };
 
 /*FUNCTIONS*/
 int		ft_strlen(char *s);
+int		grab_if3(t_philo *p);
 int		time_over(t_philo *p);
 int		time_over(t_philo *p);
 int		check_die(t_philo *p);

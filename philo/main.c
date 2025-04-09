@@ -25,7 +25,9 @@ void	init_struct(t_dinner *d)
 	int	i;
 
 	d->philo_died = 0;
-	if (pthread_mutex_init(&d->dead, NULL) != 0)
+	if (pthread_mutex_init(&d->dead, NULL) != 0 || \
+		pthread_mutex_init(&d->print, NULL) != 0 || \
+		pthread_mutex_init(&d->take_forks, NULL))
 		return ;
 	d->philos = (t_philo *)malloc(sizeof(t_philo) * d->diners);
 	if (!d->philos)
@@ -41,7 +43,8 @@ void	init_struct(t_dinner *d)
 	{
 		d->forks[i].id = i;
 		d->forks[i].philo = NULL;
-		pthread_mutex_init(&d->forks[i].fork, NULL);
+		if (pthread_mutex_init(&d->forks[i].fork, NULL))
+			return ;
 		i++;
 	}
 }
@@ -90,12 +93,12 @@ int	main(int ac, char **av)
 	if (check_input(ac, av, d) == 0)
 		return (free(d), -1);
 	init_struct(d);
-	pthread_mutex_init(&d->print, NULL);
 	init_philos(d);
 	d->dinner_start = timestamp();
 	do_dinner(d);
-	pthread_mutex_destroy(&d->print);
 	pthread_mutex_destroy(&d->dead);
+	pthread_mutex_destroy(&d->print);
+	pthread_mutex_destroy(&d->take_forks);
 	free(d->philos);
 	free(d->forks);
 	return (free(d), 0);
